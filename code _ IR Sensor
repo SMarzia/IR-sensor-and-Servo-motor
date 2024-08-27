@@ -1,0 +1,25 @@
+const int irSensorPin = A0;  // Analog pin where the IR sensor is connected
+const int ledPin = 13;       // Digital pin where the LED is connected
+int sensorValue = 0;         // Variable to store sensor value
+
+void setup() {
+  pinMode(ledPin, OUTPUT);   // Set the LED pin as an output
+  Serial.begin(9600);        // Initialize serial communication
+}
+
+void loop() {
+  sensorValue = analogRead(irSensorPin);  // Read the value from the IR sensor
+  
+  // Print the sensor value to Serial Monitor
+  Serial.print("IR Sensor Value: ");
+  Serial.println(sensorValue);
+
+  // Control the LED based on sensor value
+  if (sensorValue > 500) {   // Adjust the threshold as needed
+    digitalWrite(ledPin, HIGH); // Turn on LED if sensor value exceeds threshold
+  } else {
+    digitalWrite(ledPin, LOW);  // Turn off LED otherwise
+  }
+
+  delay(500);  // Delay for stability
+}
